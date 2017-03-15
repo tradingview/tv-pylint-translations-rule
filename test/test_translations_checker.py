@@ -5,7 +5,7 @@ import pytest
 from astroid.test_utils import extract_node
 from pylint.testutils import CheckerTestCase, Message
 
-from checker.translations_checker import TranslationsChecker
+from translations_checker.translations_checker import TranslationsChecker
 
 class TestTranslationsChecker(CheckerTestCase):
 	CHECKER_CLASS = TranslationsChecker
@@ -26,7 +26,8 @@ class TestTranslationsChecker(CheckerTestCase):
 			_('Normal case')
 			_('Normal case \{variable\}').format(variable=42)
 			_('Normal case ' + 'string')
-			_('Some special chars ’ “ ” – — ` " \\'')
+			_('Some special chars <>/\:;.,~“”-–——_\\'`"$!?@#%^&*()[]\{\}=+')
+			_(u'Some unicode string with special chars <>/\:;.,~\u2019\u201c\u201d\u002d\u2013\u2014\u005f\\'`"$!?@#%^&*()[]\{\}=+')
 		"""
 		node = extract_node(code)
 

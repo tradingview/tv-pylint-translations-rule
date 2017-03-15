@@ -16,7 +16,7 @@ setup(
 
     license='MIT',
 
-    packages=find_packages(['checker']),
+    packages=find_packages(),
 
     install_requires=['pylint', 'astroid', 'pytest', 'six'],
 )

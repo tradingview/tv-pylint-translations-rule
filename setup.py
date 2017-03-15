@@ -16,13 +16,7 @@ setup(
 
     license='MIT',
 
-    packages=find_packages(),
+    packages=find_packages(['checker']),
 
-    install_requires=['pylint'],
-
-    # $ pip install -e .test
-    # extras_require={
-    #     'dev': ['check-manifest'],
-    #     'test': ['coverage'],
-    # },
+    install_requires=['pylint', 'astroid', 'pytest', 'six'],
 )

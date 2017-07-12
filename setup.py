@@ -7,7 +7,7 @@ here = path.abspath(path.dirname(__file__))
 setup(
     name='pylint-translations-rule',
 
-    version='0.0.2',
+    version='0.0.3',
 
     url='https://github.com/pypa/sampleproject',
 
@@ -19,9 +19,9 @@ setup(
     packages=find_packages(),
 
     install_requires=[
-        'pylint==1.6.5',
-        'astroid==1.4.9',
+        'astroid==1.0.1',
+        'pylint==1.1.0',
         'pytest==3.0.7',
-        'six'
+        'six',
     ],
 )

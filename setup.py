@@ -19,8 +19,8 @@ setup(
     packages=find_packages(),
 
     install_requires=[
-        'astroid==1.0.1',
-        'pylint==1.1.0',
+        'astroid==1.4.9',
+        'pylint==1.6.5',
         'pytest==3.0.7',
         'six',
     ],

@@ -1,3 +1,1 @@
-from translations_checker import register
-
-register = register
+from .translations_checker import register, TranslationsChecker

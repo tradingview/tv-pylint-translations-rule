@@ -1,8 +1,15 @@
+import sys
+
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
 here = path.abspath(path.dirname(__file__))
+
+if sys.version_info[0] < 3:
+    version_dependent_requirements = ['astroid==1.4.9', 'pylint==1.6.5']
+else:
+    version_dependent_requirements = ['pylint==2.3.1', 'astroid==2.2.5']
 
 setup(
     name='pylint-translations-rule',
@@ -19,9 +26,7 @@ setup(
     packages=find_packages(),
 
     install_requires=[
-        'astroid==1.4.9',
-        'pylint==1.6.5',
         'pytest==3.0.7',
         'six',
-    ],
+    ] + version_dependent_requirements,
 )

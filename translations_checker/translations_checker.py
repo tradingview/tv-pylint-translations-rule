@@ -9,6 +9,11 @@ import re
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker, utils
 
+if six.PY3:
+        from astroid import Call
+else:
+        from astroid import CallFunc as Call
+
 
 class TranslationsChecker(BaseChecker):
 	__implements__ = IAstroidChecker
@@ -77,7 +82,7 @@ class TranslationsChecker(BaseChecker):
 	HTML_TAGS_RE = re.compile(r"<(br|basefont|hr|input|source|frame|param|area|meta|!--|col|link|option|base|img|wbr|!DOCTYPE).*?>|<(a|abbr|acronym|address|applet|article|aside|audio|b|bdi|bdo|big|blockquote|body|button|canvas|caption|center|cite|code|colgroup|command|datalist|dd|del|details|dfn|dialog|dir|div|dl|dt|em|embed|fieldset|figcaption|figure|font|footer|form|frameset|head|header|hgroup|h1|h2|h3|h4|h5|h6|html|i|iframe|ins|kbd|keygen|label|legend|li|map|mark|menu|meter|nav|noframes|noscript|object|ol|optgroup|output|p|pre|progress|q|rp|rt|ruby|s|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|track|tt|u|ul|var|video).*?<\/\2>")
 
 
-	def visit_callfunc(self, node):
+	def visit_call(self, node):
 		if not isinstance(node.func, astroid.Name) \
 			or node.func.name not in self.TRANSLATION_FUNCTIONS \
 			or len(node.args) == 0:
@@ -97,7 +102,7 @@ class TranslationsChecker(BaseChecker):
 			self.add_message(self.ERROR_MESSAGES_ID['variable'], node=self.current_func_node)
 			return
 
-		if isinstance(node, astroid.CallFunc):
+		if isinstance(node, Call):
 			self.add_message(self.ERROR_MESSAGES_ID['call-expression'], node=self.current_func_node)
 			return
 

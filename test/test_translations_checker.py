@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 import pytest
 
 from astroid.test_utils import extract_node
@@ -19,7 +21,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertNoMessages():
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_normal_translation_cases(self):
 		code = """
@@ -32,7 +34,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertNoMessages():
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_non_latin_string(self):
 		code = """
@@ -41,7 +43,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-non-latin-string', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_html_string(self):
 		code = """
@@ -50,7 +52,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-html-string', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_html_with_non_latin_string(self):
 		code = """
@@ -62,7 +64,7 @@ class TestTranslationsChecker(CheckerTestCase):
 			Message('translation-of-html-string', node=node),
 			Message('translation-of-non-latin-string', node=node)
 		):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_concatenation_with_html(self):
 		code = """
@@ -71,7 +73,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-html-string', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_concatenation_with_non_latin_string(self):
 		code = """
@@ -80,7 +82,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-non-latin-string', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_call_expressions(self):
 		code = """
@@ -89,7 +91,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-call-expression', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_variables(self):
 		code = """
@@ -98,7 +100,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-variable', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 
 	def test_concatenation_with_variables(self):
@@ -108,7 +110,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-variable', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_unaccectable_expression(self):
 		code = """
@@ -117,7 +119,7 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-unacceptable-expression', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)
 
 	def test_concatenation_unaccectable_expression(self):
 		code = """
@@ -126,4 +128,4 @@ class TestTranslationsChecker(CheckerTestCase):
 		node = extract_node(code)
 
 		with self.assertAddsMessages(Message('translation-of-unacceptable-expression', node=node)):
-			self.checker.visit_callfunc(node)
+			self.checker.visit_call(node)

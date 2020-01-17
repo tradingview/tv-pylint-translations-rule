@@ -9,7 +9,7 @@ here = path.abspath(path.dirname(__file__))
 if sys.version_info[0] < 3:
     version_dependent_requirements = ['astroid==1.4.9', 'pylint==1.6.5']
 else:
-    version_dependent_requirements = ['pylint==2.3.1', 'astroid==2.2.5']
+    version_dependent_requirements = ['pylint>=2.3.1,<3.0', 'astroid>=2.2.5,<3.0']
 
 setup(
     name='pylint-translations-rule',

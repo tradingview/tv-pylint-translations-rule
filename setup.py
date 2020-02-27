@@ -26,7 +26,7 @@ setup(
     packages=find_packages(),
 
     install_requires=[
-        'pytest==3.0.7',
+        'pytest==5.3.5',
         'six',
     ] + version_dependent_requirements,
 )

@@ -1,23 +1,12 @@
-# -*- coding: utf-8 -*-
-
-from __future__ import unicode_literals
+import re
 
 import astroid
 import six
-import re
-
-from pylint.interfaces import IAstroidChecker
-from pylint.checkers import BaseChecker, utils
-
-if six.PY3:
-        from astroid import Call
-else:
-        from astroid import CallFunc as Call
+from astroid import Call
+from pylint.checkers import BaseChecker
 
 
 class TranslationsChecker(BaseChecker):
-	__implements__ = IAstroidChecker
-
 	name = 'translations_checker'
 
 	BASE_ID = 99
